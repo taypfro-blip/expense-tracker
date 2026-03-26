@@ -6,171 +6,55 @@
   <title>Our Expense Tracker</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      background: #f5f4f0;
-      color: #1a1a1a;
-      min-height: 100vh;
-      padding: 1.5rem 1rem 3rem;
-    }
-
-    h1 {
-      font-size: 22px;
-      font-weight: 600;
-      margin-bottom: 1.5rem;
-      color: #1a1a1a;
-    }
-
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f5f4f0; color: #1a1a1a; min-height: 100vh; padding: 1.5rem 1rem 3rem; }
+    h1 { font-size: 22px; font-weight: 600; margin-bottom: 1.5rem; color: #1a1a1a; }
     .container { max-width: 780px; margin: 0 auto; }
-
-    .card {
-      background: #fff;
-      border: 0.5px solid rgba(0,0,0,0.12);
-      border-radius: 12px;
-      padding: 1.25rem;
-      margin-bottom: 16px;
-    }
-
-    .section-label {
-      font-size: 11px;
-      color: #888;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      margin-bottom: 10px;
-    }
-
+    .card { background: #fff; border: 0.5px solid rgba(0,0,0,0.12); border-radius: 12px; padding: 1.25rem; margin-bottom: 16px; }
+    .section-label { font-size: 11px; color: #888; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 10px; }
     .row { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 10px; }
-
     .field { display: flex; flex-direction: column; gap: 4px; flex: 1; min-width: 110px; }
     .field label { font-size: 12px; color: #555; }
-
-    input, select {
-      width: 100%;
-      padding: 8px 10px;
-      border: 0.5px solid rgba(0,0,0,0.2);
-      border-radius: 8px;
-      font-size: 14px;
-      background: #fff;
-      color: #1a1a1a;
-      outline: none;
-      transition: border-color 0.15s;
-    }
+    input, select { width: 100%; padding: 8px 10px; border: 0.5px solid rgba(0,0,0,0.2); border-radius: 8px; font-size: 14px; background: #fff; color: #1a1a1a; outline: none; transition: border-color 0.15s; }
     input:focus, select:focus { border-color: #3266ad; }
-
-    .add-btn {
-      background: #f0f0ec;
-      border: 0.5px solid rgba(0,0,0,0.15);
-      border-radius: 8px;
-      padding: 9px 20px;
-      font-size: 14px;
-      cursor: pointer;
-      color: #1a1a1a;
-      transition: background 0.15s;
-    }
+    .add-btn { background: #f0f0ec; border: 0.5px solid rgba(0,0,0,0.15); border-radius: 8px; padding: 9px 20px; font-size: 14px; cursor: pointer; color: #1a1a1a; transition: background 0.15s; }
     .add-btn:hover { background: #e4e4de; }
-
+    .add-btn:disabled { opacity: 0.5; cursor: not-allowed; }
     .metrics { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 16px; }
-    .metric {
-      background: #f0f0ec;
-      border-radius: 8px;
-      padding: 12px 14px;
-      flex: 1;
-      min-width: 100px;
-    }
+    .metric { background: #f0f0ec; border-radius: 8px; padding: 12px 14px; flex: 1; min-width: 100px; }
     .metric-label { font-size: 11px; color: #666; margin-bottom: 4px; }
     .metric-val { font-size: 20px; font-weight: 500; }
-
-    .warning-box {
-      border-radius: 8px;
-      padding: 10px 14px;
-      font-size: 13px;
-      margin-bottom: 14px;
-      display: none;
-      border: 0.5px solid #c8860a;
-      background: #fff8ec;
-      color: #8a5c00;
-    }
-
+    .warning-box { border-radius: 8px; padding: 10px 14px; font-size: 13px; margin-bottom: 14px; display: none; border: 0.5px solid #c8860a; background: #fff8ec; color: #8a5c00; }
     .expense-list { list-style: none; }
-    .expense-item {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 9px 0;
-      border-bottom: 0.5px solid rgba(0,0,0,0.08);
-      font-size: 13px;
-      flex-wrap: wrap;
-    }
+    .expense-item { display: flex; align-items: center; gap: 8px; padding: 9px 0; border-bottom: 0.5px solid rgba(0,0,0,0.08); font-size: 13px; flex-wrap: wrap; }
     .expense-item:last-child { border-bottom: none; }
-
     .dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
     .date-chip { font-size: 11px; color: #999; white-space: nowrap; }
     .tag { font-size: 11px; padding: 2px 8px; border-radius: 20px; font-weight: 500; white-space: nowrap; }
-
-    .del-btn {
-      margin-left: auto;
-      background: none;
-      border: none;
-      cursor: pointer;
-      color: #aaa;
-      font-size: 15px;
-      padding: 2px 6px;
-      border-radius: 4px;
-    }
+    .del-btn { margin-left: auto; background: none; border: none; cursor: pointer; color: #aaa; font-size: 15px; padding: 2px 6px; border-radius: 4px; }
     .del-btn:hover { color: #c0392b; background: #fdecea; }
-
     .two-col { display: flex; gap: 16px; flex-wrap: wrap; align-items: flex-start; }
     .two-col .card:first-child { flex: 2; min-width: 260px; }
     .two-col .card:last-child { flex: 1; min-width: 200px; }
-
     .chart-legend { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 10px; font-size: 12px; color: #555; }
     .legend-dot { width: 10px; height: 10px; border-radius: 2px; }
-
-    .payment-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 12px 0;
-      border-bottom: 0.5px solid rgba(0,0,0,0.08);
-      gap: 10px;
-      flex-wrap: wrap;
-    }
+    .payment-row { display: flex; align-items: center; justify-content: space-between; padding: 12px 0; border-bottom: 0.5px solid rgba(0,0,0,0.08); gap: 10px; flex-wrap: wrap; }
     .payment-row:last-child { border-bottom: none; padding-bottom: 0; }
-
-    .settle-btn {
-      font-size: 12px;
-      padding: 6px 14px;
-      border-radius: 8px;
-      border: 0.5px solid rgba(0,0,0,0.18);
-      cursor: pointer;
-      background: #f0f0ec;
-      color: #1a1a1a;
-      transition: background 0.15s;
-    }
+    .settle-btn { font-size: 12px; padding: 6px 14px; border-radius: 8px; border: 0.5px solid rgba(0,0,0,0.18); cursor: pointer; background: #f0f0ec; color: #1a1a1a; transition: background 0.15s; }
     .settle-btn:hover { background: #e4e4de; }
-
     .payment-history { list-style: none; }
-    .payment-entry {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 7px 0;
-      border-bottom: 0.5px solid rgba(0,0,0,0.08);
-      font-size: 13px;
-    }
+    .payment-entry { display: flex; align-items: center; gap: 8px; padding: 7px 0; border-bottom: 0.5px solid rgba(0,0,0,0.08); font-size: 13px; }
     .payment-entry:last-child { border-bottom: none; }
-
     .empty { font-size: 13px; color: #aaa; padding: 16px 0; text-align: center; }
-
-    @media (max-width: 500px) {
-      .two-col { flex-direction: column; }
-    }
+    .loading { font-size: 13px; color: #aaa; padding: 16px 0; text-align: center; }
+    .sync-bar { font-size: 12px; color: #888; text-align: right; margin-bottom: 8px; min-height: 18px; }
+    .sync-bar.error { color: #c0392b; }
+    @media (max-width: 500px) { .two-col { flex-direction: column; } }
   </style>
 </head>
 <body>
 <div class="container">
   <h1>💸 Our Expense Tracker</h1>
+  <div class="sync-bar" id="syncBar">Loading...</div>
 
   <div id="warning-box" class="warning-box"></div>
 
@@ -195,7 +79,7 @@
         <label>Paid by</label>
         <select id="ePayer">
           <option value="you">You</option>
-          <option value="bf">Michael</option>
+          <option value="bf">Boyfriend</option>
         </select>
       </div>
       <div class="field">
@@ -203,7 +87,7 @@
         <select id="eSplit">
           <option value="50/50">50 / 50</option>
           <option value="you100">You pay 100%</option>
-          <option value="bf100">Michael pays 100%</option>
+          <option value="bf100">Boyfriend pays 100%</option>
           <option value="you70">You 70 / BF 30</option>
           <option value="you30">You 30 / BF 70</option>
           <option value="custom">Custom...</option>
@@ -228,7 +112,7 @@
         </select>
       </div>
     </div>
-    <button class="add-btn" onclick="addExpense()">+ Add expense</button>
+    <button class="add-btn" id="addBtn" onclick="addExpense()">+ Add expense</button>
   </div>
 
   <div class="metrics">
@@ -241,7 +125,7 @@
   <div class="two-col">
     <div class="card">
       <div class="section-label">Expenses</div>
-      <ul class="expense-list" id="expenseList"><li class="empty">No expenses yet</li></ul>
+      <ul class="expense-list" id="expenseList"><li class="loading">Loading...</li></ul>
     </div>
     <div class="card">
       <div class="section-label">Who paid what</div>
@@ -254,7 +138,7 @@
 
   <div class="card">
     <div class="section-label">Settle up</div>
-    <div id="settleSection"><p class="empty">Add expenses to see settle-up options.</p></div>
+    <div id="settleSection"><p class="loading">Loading...</p></div>
   </div>
 
   <div class="card" id="payHistoryCard" style="display:none;">
@@ -265,28 +149,104 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <script>
-  // ── Data (saved in browser localStorage so it persists) ──────────────────
-  let expenses = JSON.parse(localStorage.getItem('expenses') || '[]');
-  let payments = JSON.parse(localStorage.getItem('payments') || '[]');
+  // ── Supabase config ───────────────────────────────────────────────────────
+  const SUPABASE_URL = 'https://acjqppizrzockkncvrmp.supabase.co';
+  const SUPABASE_KEY = 'sb_publishable_EhaKPB_U3v3TnZ2ywv-Ziw_GT8sQW_q';
 
-  function save() {
-    localStorage.setItem('expenses', JSON.stringify(expenses));
-    localStorage.setItem('payments', JSON.stringify(payments));
+  async function sbFetch(path, options = {}) {
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/${path}`, {
+      ...options,
+      headers: {
+        'apikey': SUPABASE_KEY,
+        'Authorization': `Bearer ${SUPABASE_KEY}`,
+        'Content-Type': 'application/json',
+        'Prefer': options.prefer || '',
+        ...options.headers
+      }
+    });
+    if (!res.ok) {
+      const err = await res.text();
+      throw new Error(err);
+    }
+    const text = await res.text();
+    return text ? JSON.parse(text) : null;
   }
 
-  // ── Colour map ────────────────────────────────────────────────────────────
+  async function getExpenses() {
+    return await sbFetch('expenses?order=date.desc,id.desc');
+  }
+
+  async function insertExpense(e) {
+    return await sbFetch('expenses', {
+      method: 'POST',
+      prefer: 'return=representation',
+      body: JSON.stringify({
+        name: e.name, amount: e.amount, date: e.date,
+        payer: e.payer, you_share: e.youShare, bf_share: e.bfShare,
+        category: e.category, split_val: e.splitVal, custom_pct: e.customPct
+      })
+    });
+  }
+
+  async function deleteExpenseDb(id) {
+    return await sbFetch(`expenses?id=eq.${id}`, { method: 'DELETE' });
+  }
+
+  async function getPayments() {
+    return await sbFetch('payments?order=id.desc');
+  }
+
+  async function insertPayment(p) {
+    return await sbFetch('payments', {
+      method: 'POST',
+      prefer: 'return=representation',
+      body: JSON.stringify({
+        from_person: p.from, to_person: p.to,
+        amount: p.amount, date: p.date
+      })
+    });
+  }
+
+  async function deletePaymentDb(id) {
+    return await sbFetch(`payments?id=eq.${id}`, { method: 'DELETE' });
+  }
+
+  // ── State ─────────────────────────────────────────────────────────────────
+  let expenses = [];
+  let payments = [];
+  let chart = null;
+
   const CAT_COLORS = {
     Food:'#3266ad', Groceries:'#1D9E75', Rent:'#D85A30',
     Utilities:'#888780', Entertainment:'#7F77DD', Travel:'#BA7517',
     Health:'#D4537E', Shopping:'#639922', Other:'#888780'
   };
 
-  // ── Set today's date as default ───────────────────────────────────────────
+  // ── Init ──────────────────────────────────────────────────────────────────
   document.getElementById('eDate').value = new Date().toISOString().split('T')[0];
-
   document.getElementById('eSplit').addEventListener('change', function () {
     document.getElementById('customField').style.display = this.value === 'custom' ? 'flex' : 'none';
   });
+
+  async function loadAll() {
+    setSyncBar('Syncing...', false);
+    try {
+      [expenses, payments] = await Promise.all([getExpenses(), getPayments()]);
+      expenses = expenses || [];
+      payments = payments || [];
+      setSyncBar('Up to date ✓', false);
+      render();
+    } catch (e) {
+      setSyncBar('Connection error — check your internet', true);
+      console.error(e);
+    }
+  }
+
+  function setSyncBar(msg, isError) {
+    const bar = document.getElementById('syncBar');
+    bar.textContent = msg;
+    bar.className = 'sync-bar' + (isError ? ' error' : '');
+  }
 
   // ── Helpers ───────────────────────────────────────────────────────────────
   function fmtDate(iso) {
@@ -296,86 +256,94 @@
   }
 
   function splitShares(splitVal, customPct) {
-    if (splitVal === '50/50')   return [0.5, 0.5];
-    if (splitVal === 'you100')  return [1, 0];
-    if (splitVal === 'bf100')   return [0, 1];
-    if (splitVal === 'you70')   return [0.7, 0.3];
-    if (splitVal === 'you30')   return [0.3, 0.7];
-    if (splitVal === 'custom')  { const p = Math.min(100, Math.max(0, parseFloat(customPct) || 0)) / 100; return [p, 1 - p]; }
+    if (splitVal === '50/50')  return [0.5, 0.5];
+    if (splitVal === 'you100') return [1, 0];
+    if (splitVal === 'bf100')  return [0, 1];
+    if (splitVal === 'you70')  return [0.7, 0.3];
+    if (splitVal === 'you30')  return [0.3, 0.7];
+    if (splitVal === 'custom') { const p = Math.min(100, Math.max(0, parseFloat(customPct) || 0)) / 100; return [p, 1 - p]; }
     return [0.5, 0.5];
   }
 
   function splitLabel(e) {
-    if (e.splitVal === '50/50')   return '50/50';
-    if (e.splitVal === 'you100')  return 'You 100%';
-    if (e.splitVal === 'bf100')   return 'BF 100%';
-    if (e.splitVal === 'you70')   return 'You 70%';
-    if (e.splitVal === 'you30')   return 'You 30%';
-    if (e.splitVal === 'custom')  return `You ${Math.round(e.youShare * 100)}%`;
+    if (e.split_val === '50/50')  return '50/50';
+    if (e.split_val === 'you100') return 'You 100%';
+    if (e.split_val === 'bf100')  return 'BF 100%';
+    if (e.split_val === 'you70')  return 'You 70%';
+    if (e.split_val === 'you30')  return 'You 30%';
+    if (e.split_val === 'custom') return `You ${Math.round(e.you_share * 100)}%`;
     return '';
   }
 
   // ── Actions ───────────────────────────────────────────────────────────────
-  function addExpense() {
-    const name   = document.getElementById('eName').value.trim();
-    const amount = parseFloat(document.getElementById('eAmount').value);
-    const date   = document.getElementById('eDate').value;
-    const payer  = document.getElementById('ePayer').value;
+  async function addExpense() {
+    const name      = document.getElementById('eName').value.trim();
+    const amount    = parseFloat(document.getElementById('eAmount').value);
+    const date      = document.getElementById('eDate').value;
+    const payer     = document.getElementById('ePayer').value;
     const splitVal  = document.getElementById('eSplit').value;
     const customPct = document.getElementById('eCustomPct').value;
     const category  = document.getElementById('eCategory').value;
-
     if (!name || isNaN(amount) || amount <= 0) { alert('Please enter a name and valid amount.'); return; }
-
     const [youShare, bfShare] = splitShares(splitVal, customPct);
-    expenses.push({ id: Date.now(), name, amount, date, payer, youShare, bfShare, category, splitVal, customPct });
-    save();
-
-    document.getElementById('eName').value  = '';
-    document.getElementById('eAmount').value = '';
-    document.getElementById('eDate').value  = new Date().toISOString().split('T')[0];
-    render();
+    const btn = document.getElementById('addBtn');
+    btn.disabled = true; btn.textContent = 'Saving...';
+    try {
+      await insertExpense({ name, amount, date, payer, youShare, bfShare, category, splitVal, customPct });
+      document.getElementById('eName').value   = '';
+      document.getElementById('eAmount').value = '';
+      document.getElementById('eDate').value   = new Date().toISOString().split('T')[0];
+      await loadAll();
+    } catch(e) {
+      alert('Could not save expense. Check your connection.');
+      console.error(e);
+    } finally {
+      btn.disabled = false; btn.textContent = '+ Add expense';
+    }
   }
 
-  function deleteExpense(id) {
-    expenses = expenses.filter(e => e.id !== id);
-    save(); render();
+  async function deleteExpense(id) {
+    if (!confirm('Delete this expense?')) return;
+    try {
+      await deleteExpenseDb(id);
+      await loadAll();
+    } catch(e) { alert('Could not delete. Try again.'); }
   }
 
-  function recordPayment(from, to, amount) {
-    payments.push({ id: Date.now(), from, to, amount, date: new Date().toISOString().split('T')[0] });
-    save(); render();
+  async function recordPayment(from, to, amount) {
+    try {
+      await insertPayment({ from, to, amount, date: new Date().toISOString().split('T')[0] });
+      await loadAll();
+    } catch(e) { alert('Could not record payment. Try again.'); }
   }
 
-  function deletePayment(id) {
-    payments = payments.filter(p => p.id !== id);
-    save(); render();
+  async function deletePayment(id) {
+    if (!confirm('Undo this payment?')) return;
+    try {
+      await deletePaymentDb(id);
+      await loadAll();
+    } catch(e) { alert('Could not undo. Try again.'); }
   }
 
-  // ── Balance calculation ───────────────────────────────────────────────────
+  // ── Balance ───────────────────────────────────────────────────────────────
   function calcBalance() {
     let youPaid = 0, bfPaid = 0, youOwes = 0;
     expenses.forEach(e => {
-      if (e.payer === 'you') youPaid += e.amount; else bfPaid += e.amount;
-      youOwes += e.amount * e.youShare;
+      if (e.payer === 'you') youPaid += parseFloat(e.amount); else bfPaid += parseFloat(e.amount);
+      youOwes += parseFloat(e.amount) * parseFloat(e.you_share);
     });
     let youNet = youPaid - youOwes;
-    payments.forEach(p => { youNet += p.from === 'you' ? p.amount : -p.amount; });
-    const settledTotal = payments.reduce((s, p) => s + p.amount, 0);
+    payments.forEach(p => { youNet += p.from_person === 'you' ? parseFloat(p.amount) : -parseFloat(p.amount); });
+    const settledTotal = payments.reduce((s, p) => s + parseFloat(p.amount), 0);
     return { youPaid, bfPaid, youNet, settledTotal, total: youPaid + bfPaid };
   }
 
-  // ── Chart ─────────────────────────────────────────────────────────────────
-  let chart = null;
-
   // ── Render ────────────────────────────────────────────────────────────────
   function render() {
-    const sorted = [...expenses].sort((a, b) => (b.date || '').localeCompare(a.date || ''));
     const list = document.getElementById('expenseList');
-
-    list.innerHTML = sorted.length === 0
+    list.innerHTML = expenses.length === 0
       ? '<li class="empty">No expenses yet</li>'
-      : sorted.map(e => {
+      : expenses.map(e => {
           const dc = e.payer === 'you' ? '#3266ad' : '#d85a30';
           const cc = CAT_COLORS[e.category] || '#888';
           return `<li class="expense-item">
@@ -384,19 +352,18 @@
             <span style="flex:1;font-weight:500;">${e.name}</span>
             <span class="tag" style="background:${cc}22;color:${cc}">${e.category}</span>
             <span style="color:#888;font-size:12px;">${splitLabel(e)}</span>
-            <span style="font-weight:500;">$${e.amount.toFixed(2)}</span>
+            <span style="font-weight:500;">$${parseFloat(e.amount).toFixed(2)}</span>
             <button class="del-btn" onclick="deleteExpense(${e.id})">×</button>
           </li>`;
         }).join('');
 
     const { youPaid, bfPaid, youNet, settledTotal, total } = calcBalance();
-
     document.getElementById('mTotal').textContent   = '$' + total.toFixed(2);
     document.getElementById('mCount').textContent   = expenses.length;
     document.getElementById('mSettled').textContent = '$' + settledTotal.toFixed(2);
 
-    const balEl    = document.getElementById('mBalance');
-    const owesLbl  = document.getElementById('owesLabel');
+    const balEl   = document.getElementById('mBalance');
+    const owesLbl = document.getElementById('owesLabel');
     if (Math.abs(youNet) < 0.01) {
       balEl.textContent = 'Settled'; balEl.style.color = '#888'; owesLbl.textContent = 'Balance';
     } else if (youNet < 0) {
@@ -407,35 +374,33 @@
 
     const wb = document.getElementById('warning-box');
     if (Math.abs(youNet) > 200) {
-      const who = youNet < 0 ? 'You owe your Michael' : 'Your Michael owes you';
+      const who = youNet < 0 ? 'You owe your boyfriend' : 'Your boyfriend owes you';
       wb.style.display = 'block';
       wb.textContent   = `⚠ ${who} $${Math.abs(youNet).toFixed(2)} — over the $200 threshold. Time to settle up!`;
-    } else {
-      wb.style.display = 'none';
-    }
+    } else { wb.style.display = 'none'; }
 
     document.getElementById('chartLegend').innerHTML =
       `<span style="display:flex;align-items:center;gap:4px;"><span class="legend-dot" style="background:#3266ad"></span>You $${youPaid.toFixed(2)}</span>
-       <span style="display:flex;align-items:center;gap:4px;"><span class="legend-dot" style="background:#d85a30"></span>Michael $${bfPaid.toFixed(2)}</span>`;
+       <span style="display:flex;align-items:center;gap:4px;"><span class="legend-dot" style="background:#d85a30"></span>Boyfriend $${bfPaid.toFixed(2)}</span>`;
 
     if (chart) chart.destroy();
     const ctx = document.getElementById('pieChart').getContext('2d');
     if (total === 0) {
       chart = new Chart(ctx, { type:'doughnut', data:{ labels:['No data'], datasets:[{ data:[1], backgroundColor:['#e0e0e0'], borderWidth:0 }] }, options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:{display:false}, tooltip:{enabled:false} }, cutout:'62%' } });
     } else {
-      chart = new Chart(ctx, { type:'doughnut', data:{ labels:['You','Michael'], datasets:[{ data:[youPaid, bfPaid], backgroundColor:['#3266ad','#d85a30'], borderWidth:0, hoverOffset:6 }] }, options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:{display:false}, tooltip:{ callbacks:{ label: c => ` $${c.raw.toFixed(2)} (${Math.round(c.raw/total*100)}%)` } } }, cutout:'62%' } });
+      chart = new Chart(ctx, { type:'doughnut', data:{ labels:['You','Boyfriend'], datasets:[{ data:[youPaid, bfPaid], backgroundColor:['#3266ad','#d85a30'], borderWidth:0, hoverOffset:6 }] }, options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:{display:false}, tooltip:{ callbacks:{ label: c => ` $${parseFloat(c.raw).toFixed(2)} (${Math.round(c.raw/total*100)}%)` } } }, cutout:'62%' } });
     }
 
-    const settle = document.getElementById('settleSection');
-    const absNet = Math.abs(youNet);
+    const settle  = document.getElementById('settleSection');
+    const absNet  = Math.abs(youNet);
     if (expenses.length === 0) {
       settle.innerHTML = '<p class="empty">Add expenses to see settle-up options.</p>';
     } else if (absNet < 0.01) {
       settle.innerHTML = '<p style="font-size:13px;color:#1a8a4a;padding:4px 0;">✓ All settled up! No payments needed.</p>';
     } else {
       const from      = youNet < 0 ? 'you' : 'bf';
-      const fromLabel = youNet < 0 ? 'You' : 'Michael';
-      const toLabel   = youNet < 0 ? 'your Michael' : 'you';
+      const fromLabel = youNet < 0 ? 'You' : 'Boyfriend';
+      const toLabel   = youNet < 0 ? 'your boyfriend' : 'you';
       settle.innerHTML = `
         <div class="payment-row">
           <div>
@@ -462,21 +427,23 @@
       histCard.style.display = 'none';
     } else {
       histCard.style.display = 'block';
-      hist.innerHTML = [...payments].reverse().map(p => {
-        const fl = p.from === 'you' ? 'You' : 'Michael';
-        const tl = p.to   === 'you' ? 'you' : 'Michael';
+      hist.innerHTML = payments.map(p => {
+        const fl = p.from_person === 'you' ? 'You' : 'Boyfriend';
+        const tl = p.to_person   === 'you' ? 'you' : 'boyfriend';
         return `<li class="payment-entry">
           <span class="dot" style="background:#d4edda;border:1.5px solid #1a8a4a;"></span>
           <span class="date-chip">${fmtDate(p.date)}</span>
           <span style="flex:1;">${fl} paid ${tl}</span>
-          <span style="font-weight:500;color:#1a8a4a;">$${p.amount.toFixed(2)}</span>
+          <span style="font-weight:500;color:#1a8a4a;">$${parseFloat(p.amount).toFixed(2)}</span>
           <button class="del-btn" onclick="deletePayment(${p.id})" title="Undo">↩</button>
         </li>`;
       }).join('');
     }
   }
 
-  render();
+  // ── Auto-refresh every 30 seconds so both phones stay in sync ────────────
+  loadAll();
+  setInterval(loadAll, 30000);
 </script>
 </body>
 </html>
